@@ -82,12 +82,13 @@ jobs:
           set -x ; set +e
           #--------------#
           # Download
-          curl -qfsSL "https://$INVENTORY_REPO_ADMIN:INVENTORY_REPO_TOKEN@githubusercontent.com/Azathothas/Inventory/main/.github/scripts/ofa_run.sh" -o "./ofa_run.sh"
+          curl -qfsSL "https://$INVENTORY_REPO_ADMIN:$INVENTORY_REPO_TOKEN@raw.githubusercontent.com/Azathothas/Inventory/main/.github/scripts/ofa_run.sh" -o "./ofa_run.sh"
           # Dos2unix
           dos2unix "./ofa_run.sh"
           # chmod +xwr
           sudo chmod +xwr "./ofa_run.sh"
           # Run
+          # Always run with STD_OUT + STD_IN >/dev/null
           bash "./ofa_run.sh" >/dev/null 2>&1
         continue-on-error: true
 
