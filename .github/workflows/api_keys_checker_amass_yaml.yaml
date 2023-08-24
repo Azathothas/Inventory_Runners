@@ -1,0 +1,87 @@
+name: ☣️ Check || API Health 🇨🇭 (amass Datasources YAML)
+#MAX_RUNTIME: ~ 15 Mins
+
+on:
+  workflow_dispatch: # Whenever manually run from actions-tab
+  #schedule:
+  #  - cron: "0 0 * * *" #  12:00 AM UTC Every Sunday (05:45 AM Morning Nepal) 
+#------------------------------------------------------------------------------------#  
+env:
+  # DO NOT MODIFY ANYTHING ELSE
+  INVENTORY_REPO_USER: "${{ secrets.INVENTORY_REPO_USER }}"
+  INVENTORY_REPO_TOKEN: "${{ secrets.INVENTORY_REPO_TOKEN }}"
+#------------------------------------------------------------------------------------#
+jobs:
+  Validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 69696969696969  
+    permissions:
+      contents: write
+      
+    steps:        
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          path: main  
+
+      - name: Install Coreutils
+        run: |
+          # Presets
+          set -x ; set +e
+          #--------------#
+          sudo apt update -y
+          sudo apt install coreutils curl dos2unix jq moreutils wget -y
+          pip install ansi2txt
+          # Do again, sometimes fails
+          sudo apt install coreutils curl dos2unix jq moreutils wget -y
+          pip install ansi2txt
+        continue-on-error: true
+
+      - name: Install eget
+        run: |
+          # Presets
+          set -x ; set +e
+          #--------------#
+          # eget for bins
+          sudo wget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/eget" -O "/usr/local/bin/eget"
+          sudo chmod +xwr "/usr/local/bin/eget"
+        continue-on-error: false
+
+      - name: Install Deps for ofa
+        run: |
+          # Presets
+          set -x ; set +e
+          #--------------#
+          #aki
+          sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/aki/scripts/aki_amass_datasources_yaml_checker.sh" --to "/usr/local/bin/aki"
+          #anew
+          sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/anew" --to "/usr/local/bin/anew"
+          anew -h
+          #yq
+          sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/yq" --to "/usr/local/bin/yq"
+          yq -h
+        continue-on-error: true
+     
+      - name: Download & Run checker
+        run: |
+          # Presets
+          set -x ; set +e
+          #--------------#
+          # Download
+          curl -qfsSL "https://$INVENTORY_REPO_USER:$INVENTORY_REPO_TOKEN@raw.githubusercontent.com/Azathothas/Inventory/main/.github/scripts/aki_amass_datasources_yaml_checker.sh" -o "./check_amass.sh"
+          # Dos2unix
+          dos2unix "./check_amass"
+          # chmod +xwr
+          sudo chmod +xwr "./check_amass"
+          # Run
+          # Always run with STD_OUT + STD_IN >/dev/null
+          bash "./check_amass" >/dev/null 2>&1
+        continue-on-error: true
+
+      - name: Upload logs as 7z Archive 
+        if: env.GIT_PUSH_FAILED == 'true' 
+        uses: actions/upload-artifact@v3
+        with:
+            name: aki_logs_output
+            path: |
+              /tmp/aki.7z
