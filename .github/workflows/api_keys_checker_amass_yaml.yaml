@@ -1,5 +1,6 @@
 name: ☣️ Check || API Health 🇨🇭 (amass Datasources YAML)
-#MAX_RUNTIME: ~ 15 Mins
+# Alt: 
+#MAX_RUNTIME: ~ 05-10 Mins
 
 on:
   workflow_dispatch: # Whenever manually run from actions-tab
