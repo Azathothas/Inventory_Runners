@@ -1,11 +1,11 @@
-name: gh_ofa_runner01_az@cluster.orion
+name: 🐉 gh_ofa_runner01_az@cluster.orion
 # This will likely increase as Repo Size gets bigger over time
 # MAX_RUNTIME: 05-15 Mins/Domain (Mode: Extensive)
 # CPU USAGE: 50-60% (Peak) || 10-15% (Active) || 0-5% (Passive)
 on:
   workflow_dispatch: # Whenever manually run from actions-tab
   #schedule:
-  #  - cron: "0 0 * * *" #  12:00 AM UTC Every Sunday (05:45 AM Morning Nepal) 
+  #  - cron: "0 12 * * *" #  12:00 PM UTC Every Sunday (05:45 PM Morning Nepal) 
 #------------------------------------------------------------------------------------#  
 env:
   # DO NOT MODIFY ANYTHING ELSE
@@ -34,6 +34,13 @@ jobs:
           sudo apt install coreutils curl dos2unix jq moreutils wget -y
           # Do again, sometimes fails
           sudo apt install coreutils curl dos2unix jq moreutils wget -y
+          pip install ansi2txt
+          # For TG BOT Notifs
+          pip install apprise 
+          pip install apprise 2>/dev/null
+          # For neofetch
+          pip install archey4
+          pip install archey4 2>/dev/null
         continue-on-error: true
 
       - name: Install eget
