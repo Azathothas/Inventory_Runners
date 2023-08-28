@@ -1,0 +1,311 @@
+name: 🛰️ Resolve || 🔰 Clean Subs 📡
+#MAX_RUNTIME: 45 Minutes
+on:
+  workflow_dispatch: # Whenever manually run from actions-tab
+  schedule:
+    - cron: "30 04 * * *" #  ( 04:30 AM UTC --> 10:15 AM Morning )
+  
+jobs:
+#------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------------#
+    puredns-resolve:
+      name: Resolve with PureDNS
+      runs-on: ubuntu-latest
+      
+      steps:        
+        - name: Checkout repository
+          uses: actions/checkout@v3
+          with:
+            path: main  
+
+        - name: Install Coreutils
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            sudo apt update -y
+            sudo apt install coreutils curl dos2unix jq moreutils wget -y
+            pip install ansi2txt
+            # Do again, sometimes fails
+            sudo apt install coreutils curl dos2unix jq moreutils wget -y
+            pip install ansi2txt
+            # For TG BOT Notifs
+            pip install apprise 
+            pip install apprise 2>/dev/null
+            # For neofetch
+            pip install archey4
+            pip install archey4 2>/dev/null
+          continue-on-error: true
+  
+        - name: Install eget
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            # eget for bins
+            sudo wget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/eget" -O "/usr/local/bin/eget"
+            sudo chmod +xwr "/usr/local/bin/eget"
+          continue-on-error: false
+
+        - name: Install Deps for resDNS
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            #7z
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/bin/7z" ; sudo chmod +xwr "/usr/bin/7z"            
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/local/bin/7z" ; sudo chmod +xwr "/usr/local/bin/7z"
+            #anew
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/anew" --to "/usr/local/bin/anew"
+            anew -h
+            #dnsx
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dnsx" --to "/usr/local/bin/dnsx"
+            dnsx -h
+            #massdns
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/massdns" --to "/usr/local/bin/massdns"
+            massdns -h
+            #puredns
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/puredns" --to "/usr/local/bin/puredns"
+            puredns -h
+            #resDNS
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns"
+            resdns -h
+            #shuffledns
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/shuffledns" --to "/usr/local/bin/shuffledns"
+            shuffledns -h
+            #subxtract
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/subxtract" --to "/usr/local/bin/subxtract"
+            subxtract -h
+            #yq
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/yq" --to "/usr/local/bin/yq"
+            sudo chmod +xwr "/usr/local/bin/yq"
+            yq -h
+          continue-on-error: true 
+
+        - name: Download & Run Resolver
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            # Download
+            curl -qfsSL "https://$INVENTORY_REPO_USER:$INVENTORY_REPO_TOKEN@raw.githubusercontent.com/Azathothas/Inventory/main/.github/scripts/resolve_domains_puredns.sh" -o "./resolve_domains_puredns.sh"
+            # Dos2unix
+            dos2unix "./resolve_domains_puredns.sh"
+            # chmod +xwr
+            sudo chmod +xwr "./resolve_domains_puredns.sh"
+            # Run
+            # Always run with STD_OUT + STD_IN >/dev/null
+            bash "./resolve_domains_puredns.sh" >/dev/null 2>&1
+          continue-on-error: true
+
+        - name: Upload_PureDNS_Output
+          uses: actions/upload-artifact@v3
+          with:
+              name: resdns_puredns
+              path: |
+                /tmp/resdns_puredns_output.7z
+#------------------------------------------------------------------------------------#
+    shuffledns-resolve:
+      name: Resolve with ShuffleDNS
+      runs-on: ubuntu-latest
+      
+      steps:        
+        - name: Checkout repository
+          uses: actions/checkout@v3
+          with:
+            path: main  
+
+        - name: Install Coreutils
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            sudo apt update -y
+            sudo apt install coreutils curl dos2unix jq moreutils wget -y
+            pip install ansi2txt
+            # Do again, sometimes fails
+            sudo apt install coreutils curl dos2unix jq moreutils wget -y
+            pip install ansi2txt
+            # For TG BOT Notifs
+            pip install apprise 
+            pip install apprise 2>/dev/null
+            # For neofetch
+            pip install archey4
+            pip install archey4 2>/dev/null
+          continue-on-error: true
+  
+        - name: Install eget
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            # eget for bins
+            sudo wget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/eget" -O "/usr/local/bin/eget"
+            sudo chmod +xwr "/usr/local/bin/eget"
+          continue-on-error: false
+
+        - name: Install Deps for resDNS
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            #7z
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/bin/7z" ; sudo chmod +xwr "/usr/bin/7z"            
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/local/bin/7z" ; sudo chmod +xwr "/usr/local/bin/7z"
+            #anew
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/anew" --to "/usr/local/bin/anew"
+            anew -h
+            #dnsx
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dnsx" --to "/usr/local/bin/dnsx"
+            dnsx -h
+            #massdns
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/massdns" --to "/usr/local/bin/massdns"
+            massdns -h
+            #puredns
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/puredns" --to "/usr/local/bin/puredns"
+            puredns -h
+            #resDNS
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns"
+            resdns -h
+            #shuffledns
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/shuffledns" --to "/usr/local/bin/shuffledns"
+            shuffledns -h
+            #subxtract
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/subxtract" --to "/usr/local/bin/subxtract"
+            subxtract -h
+            #yq
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/yq" --to "/usr/local/bin/yq"
+            sudo chmod +xwr "/usr/local/bin/yq"
+            yq -h
+          continue-on-error: true 
+
+        - name: Download & Run Resolver
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            # Download
+            curl -qfsSL "https://$INVENTORY_REPO_USER:$INVENTORY_REPO_TOKEN@raw.githubusercontent.com/Azathothas/Inventory/main/.github/scripts/resolve_domains_shuffledns.sh" -o "./resolve_domains_shuffledns.sh"
+            # Dos2unix
+            dos2unix "./resolve_domains_shuffledns.sh"
+            # chmod +xwr
+            sudo chmod +xwr "./resolve_domains_shuffledns.sh"
+            # Run
+            # Always run with STD_OUT + STD_IN >/dev/null
+            bash "./resolve_domains_shuffledns.sh" >/dev/null 2>&1
+          continue-on-error: true
+
+        - name: Upload_ShuffleDNS_Output
+          uses: actions/upload-artifact@v3
+          with:
+              name: resdns_shuffledns
+              path: |
+                /tmp/resdns_shuffledns_output.7z
+#------------------------------------------------------------------------------------#     
+
+    resolve-domains:
+      name: 🛰️ Resolve || 🔰 Clean Subs 📡
+      runs-on: ubuntu-latest
+      needs: [puredns-resolve, shuffledns-resolve]
+      
+      steps:        
+        - name: Checkout repository
+          uses: actions/checkout@v3
+          with:
+            path: main  
+
+        - name: Install Coreutils
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            sudo apt update -y
+            sudo apt install coreutils curl dos2unix jq moreutils wget -y
+            pip install ansi2txt
+            # Do again, sometimes fails
+            sudo apt install coreutils curl dos2unix jq moreutils wget -y
+            pip install ansi2txt
+            # For TG BOT Notifs
+            pip install apprise 
+            pip install apprise 2>/dev/null
+            # For neofetch
+            pip install archey4
+            pip install archey4 2>/dev/null
+          continue-on-error: true
+  
+        - name: Install eget
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            # eget for bins
+            sudo wget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/eget" -O "/usr/local/bin/eget"
+            sudo chmod +xwr "/usr/local/bin/eget"
+          continue-on-error: false
+
+        - name: Install Deps for resDNS
+          run: |
+            # Presets
+            set -x ; set +e
+            #--------------#
+            #7z
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/bin/7z" ; sudo chmod +xwr "/usr/bin/7z"            
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/local/bin/7z" ; sudo chmod +xwr "/usr/local/bin/7z"
+            #anew
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/anew" --to "/usr/local/bin/anew"
+            anew -h
+            #dnsx
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dnsx" --to "/usr/local/bin/dnsx"
+            dnsx -h
+            #massdns
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/massdns" --to "/usr/local/bin/massdns"
+            massdns -h
+            #puredns
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/puredns" --to "/usr/local/bin/puredns"
+            puredns -h
+            #resDNS
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns"
+            resdns -h
+            #shuffledns
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/shuffledns" --to "/usr/local/bin/shuffledns"
+            shuffledns -h
+            #subxtract
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/subxtract" --to "/usr/local/bin/subxtract"
+            subxtract -h
+            #yq
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/yq" --to "/usr/local/bin/yq"
+            sudo chmod +xwr "/usr/local/bin/yq"
+            yq -h
+          continue-on-error: true 
+
+        - name: Setup Env
+          run: |
+            # Create tmp dir for resolvers
+            mkdir /tmp/resolver
+
+        - name: Download Resolver from Artifacts
+          uses: actions/download-artifact@v3
+          with:
+            path: /tmp/resolver
+
+        - name: Setup Tailscale
+          run: |
+            #Download & Chmod
+            sudo curl -qfSL "https://raw.githubusercontent.com/Azathothas/Static-Binaries/main/tailscale/tailscale_amd_x86_64_Linux" -o "/usr/local/bin/tailscale"
+            sudo curl -qfSL "https://raw.githubusercontent.com/Azathothas/Static-Binaries/main/tailscale/tailscaled_amd_x86_64_Linux" -o "/usr/local/bin/tailscaled"
+            sudo chmod +xwr /usr/local/bin/tailscale*
+            #Enable Userspace Networking
+            sudo tailscaled --tun=userspace-networking --socks5-server=localhost:9025 --outbound-http-proxy-listen=localhost:9025 >/dev/null 2>&1 &
+            #Authenticate with Ephemeral Key: https://login.tailscale.com/admin/settings/keys
+            sudo tailscale up --ssh --hostname="ephmea" --authkey="tskey-auth-ksYVhg1CNTRL-A5QDDdH66vU2pVMcgBy2wUYwzgL4Sv2F" 
+  
+        - name: Breakpoint || Sleep ∞
+          run: |
+            while :; do sleep 1; done  
+
+        - name: Upload_Resolved_Output
+          uses: actions/upload-artifact@v3
+          with:
+              name: resolved_domains
+              path: |
+                /tmp/resolved_domains.7z
