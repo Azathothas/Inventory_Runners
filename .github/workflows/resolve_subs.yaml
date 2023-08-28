@@ -4,9 +4,13 @@ on:
   workflow_dispatch: # Whenever manually run from actions-tab
   schedule:
     - cron: "30 04 * * *" #  ( 04:30 AM UTC --> 10:15 AM Morning )
-  
+#------------------------------------------------------------------------------------#    
+env:
+  # DO NOT MODIFY ANYTHING ELSE
+  INVENTORY_REPO_USER: "${{ secrets.INVENTORY_REPO_USER }}"
+  INVENTORY_REPO_TOKEN: "${{ secrets.INVENTORY_REPO_TOKEN }}"
+#------------------------------------------------------------------------------------#  
 jobs:
-#------------------------------------------------------------------------------------#
 #------------------------------------------------------------------------------------#
     puredns-resolve:
       name: Resolve with PureDNS
