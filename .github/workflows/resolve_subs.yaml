@@ -313,20 +313,21 @@ jobs:
           with:
             path: /tmp/resolver
 
-        - name: Setup Tailscale
+        - name: Download & Run Resolver
           run: |
-            #Download & Chmod
-            sudo curl -qfSL "https://raw.githubusercontent.com/Azathothas/Static-Binaries/main/tailscale/tailscale_amd_x86_64_Linux" -o "/usr/local/bin/tailscale"
-            sudo curl -qfSL "https://raw.githubusercontent.com/Azathothas/Static-Binaries/main/tailscale/tailscaled_amd_x86_64_Linux" -o "/usr/local/bin/tailscaled"
-            sudo chmod +xwr /usr/local/bin/tailscale*
-            #Enable Userspace Networking
-            sudo tailscaled --tun=userspace-networking --socks5-server=localhost:9025 --outbound-http-proxy-listen=localhost:9025 >/dev/null 2>&1 &
-            #Authenticate with Ephemeral Key: https://login.tailscale.com/admin/settings/keys
-            sudo tailscale up --ssh --hostname="ephmea" --authkey="tskey-auth-ksYVhg1CNTRL-A5QDDdH66vU2pVMcgBy2wUYwzgL4Sv2F" 
-  
-        - name: Breakpoint || Sleep ∞
-          run: |
-            while :; do sleep 1; done  
+            # Presets
+            set -x ; set +e
+            #--------------#
+            # Download
+            curl -qfsSL "https://$INVENTORY_REPO_USER:$INVENTORY_REPO_TOKEN@raw.githubusercontent.com/Azathothas/Inventory/main/.github/scripts/resolve_domains.sh" -o "./resolve_domains.sh"
+            # Dos2unix
+            dos2unix "./resolve_domains.sh"
+            # chmod +xwr
+            sudo chmod +xwr "./resolve_domains.sh"
+            # Run
+            # Always run with STD_OUT + STD_IN >/dev/null
+            bash "./resolve_domains.sh" >/dev/null 2>&1
+          continue-on-error: true
 
         - name: Upload_Resolved_Output
           uses: actions/upload-artifact@v3
