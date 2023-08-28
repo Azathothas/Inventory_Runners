@@ -65,6 +65,9 @@ jobs:
             #dnsx
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dnsx" --to "/usr/local/bin/dnsx"
             dnsx -h
+            #inscope
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/inscope" --to "/usr/local/bin/inscope"
+            inscope -h
             #massdns
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/massdns" --to "/usr/local/bin/massdns"
             massdns -h
@@ -75,6 +78,9 @@ jobs:
             sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns" 
             sudo chmod +xwr "/usr/local/bin/resdns"
             resdns -h
+            #scopeview
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/scopeview" --to "/usr/local/bin/scopeview"
+            scopeview -h
             #shuffledns
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/shuffledns" --to "/usr/local/bin/shuffledns"
             shuffledns -h
@@ -163,6 +169,9 @@ jobs:
             #dnsx
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dnsx" --to "/usr/local/bin/dnsx"
             dnsx -h
+            #inscope
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/inscope" --to "/usr/local/bin/inscope"
+            inscope -h
             #massdns
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/massdns" --to "/usr/local/bin/massdns"
             massdns -h
@@ -170,9 +179,12 @@ jobs:
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/puredns" --to "/usr/local/bin/puredns"
             puredns -h
             #resDNS
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns"
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns" 
             sudo chmod +xwr "/usr/local/bin/resdns"
             resdns -h
+            #scopeview
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/scopeview" --to "/usr/local/bin/scopeview"
+            scopeview -h
             #shuffledns
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/shuffledns" --to "/usr/local/bin/shuffledns"
             shuffledns -h
@@ -183,7 +195,7 @@ jobs:
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/yq" --to "/usr/local/bin/yq"
             sudo chmod +xwr "/usr/local/bin/yq"
             yq -h
-          continue-on-error: true 
+          continue-on-error: true  
 
         - name: Download & Run Resolver
           run: |
@@ -263,6 +275,9 @@ jobs:
             #dnsx
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dnsx" --to "/usr/local/bin/dnsx"
             dnsx -h
+            #inscope
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/inscope" --to "/usr/local/bin/inscope"
+            inscope -h
             #massdns
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/massdns" --to "/usr/local/bin/massdns"
             massdns -h
@@ -270,9 +285,12 @@ jobs:
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/puredns" --to "/usr/local/bin/puredns"
             puredns -h
             #resDNS
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns"
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns" 
             sudo chmod +xwr "/usr/local/bin/resdns"
             resdns -h
+            #scopeview
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/scopeview" --to "/usr/local/bin/scopeview"
+            scopeview -h
             #shuffledns
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/shuffledns" --to "/usr/local/bin/shuffledns"
             shuffledns -h
