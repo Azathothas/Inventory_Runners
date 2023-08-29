@@ -1,5 +1,5 @@
 name: 🧮🖨️ Generate Permutation List
-# MAX_RUNTIME: 60-90 Mins/Domain (Mode: Extensive)
+# MAX_RUNTIME: 15-20 Mins (~ 100 Million Permutations) (Mode: Extensive)
 # CPU USAGE: 90-100% (Peak)
 on:
   workflow_dispatch: # Whenever manually run from actions-tab
@@ -121,10 +121,10 @@ jobs:
           bash "./permutate_subs.sh" >/dev/null 2>&1
         continue-on-error: true
 
-      - name: Upload Results as 7z Archive 
-        #if: env.GIT_PUSH_FAILED == 'true' 
-        uses: actions/upload-artifact@v3
-        with:
-            name: ofa_logs_output
-            path: |
-              /tmp/Permutations.7z
+      # - name: Upload Results as 7z Archive 
+      #   #if: env.GIT_PUSH_FAILED == 'true' 
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #       name: ofa_logs_output
+      #       path: |
+      #         /tmp/Permutations.7z
