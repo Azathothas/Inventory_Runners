@@ -104,19 +104,6 @@ jobs:
           sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/yq" --to "/usr/local/bin/yq"
           yq -h
         continue-on-error: true
-
-      - name: Install 7z
-        run: |
-          set -x ; set +e
-          cd $(mktemp -d) && curl -qfsSLJO "https://www.7-zip.org/$(curl -qfsSL "https://www.7-zip.org/download.html" | grep -o 'href="[^"]*"' | sed 's/href="//' | grep 'linux-x64.tar.xz' | sed 's/"$//' | sort | tail -n 1)"
-          find . -type f -name '*.xz' -exec tar -xf {} \;
-          #sudo rm $(which 7z) 2>/dev/null ; sudo rm $(which 7z) 2>/dev/null
-          sudo find . -type f -name '7zzs' ! -name '*.xz' -exec cp {} "/usr/local/bin/7z" \;
-          sudo chmod +xwr "/usr/local/bin/7z"
-          sudo find . -type f -name '7zzs' ! -name '*.xz' -exec cp {} "/usr/bin/7z" \;
-          sudo chmod +xwr "/usr/bin/7z"
-          7z -h
-        continue-on-error: true
         
       - name: Download & Run Generator
         run: |
