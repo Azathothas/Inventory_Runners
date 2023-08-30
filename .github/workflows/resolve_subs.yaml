@@ -2,8 +2,8 @@ name: 🛰️ Resolve || 🔰 Clean Subs 📡
 #MAX_RUNTIME: 45 Minutes
 on:
   workflow_dispatch: # Whenever manually run from actions-tab
-  schedule:
-    - cron: "30 04 * * *" #  ( 04:30 AM UTC --> 10:15 AM Morning )
+ # schedule:
+ #   - cron: "30 04 * * *" #  ( 04:30 AM UTC --> 10:15 AM Morning )
 #------------------------------------------------------------------------------------#    
 env:
   # DO NOT MODIFY ANYTHING ELSE
