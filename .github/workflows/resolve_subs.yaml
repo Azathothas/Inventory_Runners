@@ -132,6 +132,7 @@ jobs:
           with:
             path: main  
 
+
         - name: Install Coreutils
           run: |
             # Presets
@@ -140,9 +141,13 @@ jobs:
             sudo apt update -y
             sudo apt install coreutils curl dos2unix jq moreutils wget -y
             pip install ansi2txt
+            #Subzuf
+            pip3 install "git+https://github.com/elceef/subzuf.git"
             # Do again, sometimes fails
             sudo apt install coreutils curl dos2unix jq moreutils wget -y
             pip install ansi2txt
+            #Subzuf
+            pip3 install "git+https://github.com/elceef/subzuf.git"            
             # For TG BOT Notifs
             pip install apprise 
             pip install apprise 2>/dev/null
@@ -161,32 +166,32 @@ jobs:
             sudo chmod +xwr "/usr/local/bin/eget"
           continue-on-error: false
 
-        - name: Install Deps for resDNS
+        - name: Install Deps
           run: |
             # Presets
             set -x ; set +e
             #--------------#
             #7z
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/bin/7z" ; sudo chmod +xwr "/usr/bin/7z"            
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/local/bin/7z" ; sudo chmod +xwr "/usr/local/bin/7z"
+            sudo rm /usr/bin/7z 2>/dev/null ; sudo rm /usr/local/bin/7z 2>/dev/null
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/local/bin/7z"
+            7z -h
             #anew
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/anew" --to "/usr/local/bin/anew"
             anew -h
-            #dnsx
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dnsx" --to "/usr/local/bin/dnsx"
-            dnsx -h
+            #dsieve
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dsieve" --to "/usr/local/bin/dsieve"
+            dsieve -h
+            #gotator
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/gotator" --to "/usr/local/bin/gotator"
+            gotator -h
+            #mksub
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/mksub" --to "/usr/local/bin/mksub"
+            mksub -h
             #inscope
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/inscope" --to "/usr/local/bin/inscope"
             inscope -h
-            #massdns
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/massdns" --to "/usr/local/bin/massdns"
-            massdns -h
-            #puredns
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/puredns" --to "/usr/local/bin/puredns"
-            puredns -h
             #resDNS
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns" 
-            sudo chmod +xwr "/usr/local/bin/resdns"
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns" ; sudo chmod +xwr "/usr/local/bin/resdns"
             resdns -h
             #scopeview
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/scopeview" --to "/usr/local/bin/scopeview"
@@ -194,15 +199,16 @@ jobs:
             #shuffledns
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/shuffledns" --to "/usr/local/bin/shuffledns"
             shuffledns -h
-            #subxtract
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/subxtract" --to "/usr/local/bin/subxtract"
-            subxtract -h
+            #Tok
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/tok" --to "/usr/local/bin/tok"
+            tok -h
+            #rclone
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/rclone" --to "/usr/local/bin/rclone"
+            rclone -h
             #yq
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/yq" --to "/usr/local/bin/yq"
-            sudo chmod +xwr "/usr/local/bin/yq"
             yq -h
-          continue-on-error: true  
-
+          continue-on-error: true 
         - name: Download & Run Resolver
           run: |
             # Presets
@@ -238,6 +244,7 @@ jobs:
           with:
             path: main  
 
+
         - name: Install Coreutils
           run: |
             # Presets
@@ -246,14 +253,16 @@ jobs:
             sudo apt update -y
             sudo apt install coreutils curl dos2unix jq moreutils wget -y
             pip install ansi2txt
+            #Subzuf
+            pip3 install "git+https://github.com/elceef/subzuf.git"
             # Do again, sometimes fails
             sudo apt install coreutils curl dos2unix jq moreutils wget -y
             pip install ansi2txt
-            pip3 install "git+https://github.com/elceef/subzuf.git"
+            #Subzuf
+            pip3 install "git+https://github.com/elceef/subzuf.git"            
             # For TG BOT Notifs
             pip install apprise 
             pip install apprise 2>/dev/null
-            pip3 install "git+https://github.com/elceef/subzuf.git"
             # For neofetch
             pip install archey4
             pip install archey4 2>/dev/null
@@ -269,35 +278,32 @@ jobs:
             sudo chmod +xwr "/usr/local/bin/eget"
           continue-on-error: false
 
-        - name: Install Deps for resDNS
+        - name: Install Deps
           run: |
             # Presets
             set -x ; set +e
             #--------------#
             #7z
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/bin/7z" ; sudo chmod +xwr "/usr/bin/7z"            
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/local/bin/7z" ; sudo chmod +xwr "/usr/local/bin/7z"
+            sudo rm /usr/bin/7z 2>/dev/null ; sudo rm /usr/local/bin/7z 2>/dev/null
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/7z" --to "/usr/local/bin/7z"
+            7z -h
             #anew
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/anew" --to "/usr/local/bin/anew"
             anew -h
-            #dnsx
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dnsx" --to "/usr/local/bin/dnsx"
-            dnsx -h
             #dsieve
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dsieve" --to "/usr/local/bin/dsieve"
             dsieve -h
+            #gotator
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/gotator" --to "/usr/local/bin/gotator"
+            gotator -h
+            #mksub
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/mksub" --to "/usr/local/bin/mksub"
+            mksub -h
             #inscope
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/inscope" --to "/usr/local/bin/inscope"
             inscope -h
-            #massdns
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/massdns" --to "/usr/local/bin/massdns"
-            massdns -h
-            #puredns
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/puredns" --to "/usr/local/bin/puredns"
-            puredns -h
             #resDNS
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns" 
-            sudo chmod +xwr "/usr/local/bin/resdns"
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Arsenal/main/resdns/resdns.sh" --to "/usr/local/bin/resdns" ; sudo chmod +xwr "/usr/local/bin/resdns"
             resdns -h
             #scopeview
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/scopeview" --to "/usr/local/bin/scopeview"
@@ -305,17 +311,16 @@ jobs:
             #shuffledns
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/shuffledns" --to "/usr/local/bin/shuffledns"
             shuffledns -h
-            #subxtract
-            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/subxtract" --to "/usr/local/bin/subxtract"
-            subxtract -h
             #Tok
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/tok" --to "/usr/local/bin/tok"
             tok -h
+            #rclone
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/rclone" --to "/usr/local/bin/rclone"
+            rclone -h
             #yq
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/yq" --to "/usr/local/bin/yq"
-            sudo chmod +xwr "/usr/local/bin/yq"
             yq -h
-          continue-on-error: true 
+          continue-on-error: true  
 
         - name: Setup Env
           run: |
