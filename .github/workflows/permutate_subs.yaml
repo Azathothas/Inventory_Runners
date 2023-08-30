@@ -1,5 +1,5 @@
 name: 🧮🖨️ Generate Permutation List
-# MAX_RUNTIME: 15-20 Mins (~ 100 Million Permutations) (Mode: Extensive)
+# MAX_RUNTIME: 60-90 Mins (~ 100 Million Permutations) (Mode: Extensive)
 # CPU USAGE: 90-100% (Peak)
 on:
   workflow_dispatch: # Whenever manually run from actions-tab
