@@ -1,9 +1,9 @@
 name: 🛰️ Resolve || 🔰 Clean Subs 📡
-#MAX_RUNTIME: 45 Minutes
+#MAX_RUNTIME: 15-30 Minutes
 on:
   workflow_dispatch: # Whenever manually run from actions-tab
- # schedule:
- #   - cron: "30 04 * * *" #  ( 04:30 AM UTC --> 10:15 AM Morning )
+  #schedule:
+  #  - cron: "15 20 * * *" #( 08:15 PM UTC --> 02:00 AM Midnight )
 #------------------------------------------------------------------------------------#    
 env:
   # DO NOT MODIFY ANYTHING ELSE
@@ -243,9 +243,11 @@ jobs:
             # Do again, sometimes fails
             sudo apt install coreutils curl dos2unix jq moreutils wget -y
             pip install ansi2txt
+            pip3 install "git+https://github.com/elceef/subzuf.git"
             # For TG BOT Notifs
             pip install apprise 
             pip install apprise 2>/dev/null
+            pip3 install "git+https://github.com/elceef/subzuf.git"
             # For neofetch
             pip install archey4
             pip install archey4 2>/dev/null
@@ -275,6 +277,9 @@ jobs:
             #dnsx
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dnsx" --to "/usr/local/bin/dnsx"
             dnsx -h
+            #dsieve
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/dsieve" --to "/usr/local/bin/dsieve"
+            dsieve -h
             #inscope
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/inscope" --to "/usr/local/bin/inscope"
             inscope -h
@@ -297,6 +302,9 @@ jobs:
             #subxtract
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/subxtract" --to "/usr/local/bin/subxtract"
             subxtract -h
+            #Tok
+            sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/tok" --to "/usr/local/bin/tok"
+            tok -h
             #yq
             sudo eget "https://raw.githubusercontent.com/Azathothas/Toolpacks/main/x86_64/yq" --to "/usr/local/bin/yq"
             sudo chmod +xwr "/usr/local/bin/yq"
