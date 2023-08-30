@@ -1,5 +1,5 @@
 name: 🛰️ Resolve || 🔰 Clean Subs 📡
-#MAX_RUNTIME: 15-30 Minutes
+#MAX_RUNTIME: 30-60 Minutes
 on:
   workflow_dispatch: # Whenever manually run from actions-tab
   #schedule:
