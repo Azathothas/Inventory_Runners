@@ -4,8 +4,8 @@ name: 🛸 CDNCheck Probe (CDN | Cloud | WAF)
 
 on:
   workflow_dispatch: # Whenever manually run from actions-tab
-  schedule:
-    - cron: "40 03 * * *" #( 03:40 AM UTC --> 09:25 AM Morning )
+  #schedule:
+  #  - cron: "40 03 * * *" #( 03:40 AM UTC --> 09:25 AM Morning )
 #------------------------------------------------------------------------------------#  
 env:
   # DO NOT MODIFY ANYTHING ELSE
